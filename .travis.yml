@@ -22,7 +22,7 @@ jobs:
           if: type = pull_request AND branch = develop
           install:
               # - eval "$(echo git remote add pullRequestOrigin https://github.com/$TRAVIS_PULL_REQUEST_SLUG.git)"
-              - git remote add aa https://github.com/connect-foundation.git
+              - git remote add aa https://github.com/connect-foundation/2019-05.git
           before_script:
               - git remote -v
               - git pull aa develop:oDev
