@@ -22,6 +22,7 @@ jobs:
           if: type = pull_request AND branch = develop
           install:
               - GIT_REMOTE_CREATE_CMD=$(echo git remote add pullRequestOrigin https://github.com/$TRAVIS_PULL_REQUEST_SLUG.git)
+              - echo $GIT_REMOTE_CREATE_CMD
               - eval $GIT_REMOTE_CREATE_CMD
           before_script:
               - git branch -a
