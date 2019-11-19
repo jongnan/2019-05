@@ -23,7 +23,7 @@ jobs:
           install:
               - git remote add pullRequestOrigin https://github.com/$TRAVIS_PULL_REQUEST_SLUG.git
           before_script:
-              - git branch -v
+              - git branch -a
               - echo $TRAVIS_PULL_REQUEST_SHA
               - echo $TRAVIS_PULL_REQUEST_SLUG
               - echo $TRAVIS_REPO_SLUG
