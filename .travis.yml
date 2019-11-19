@@ -45,8 +45,16 @@ jobs:
         - name: ‘BACK TEST’
           if: type = pull_request AND branch = develop
           before_script:
-              - git branch -a
-              - GIT_DIFF_RESULT=$(bash diff_checking.sh remotes/origin/test remotes/origin/develop)
+              - |
+                  if [ $TRAVIS_PULL_REQUEST_SLUG == $TRAVIS_REPO_SLUG ]; then
+                      GIT_DIFF_RESULT=$(eval "$(echo bash diff_checking.sh remotes/origin/$TRAVIS_PULL_REQUEST_BRANCH remotes/origin/develop)")
+                      echo "pull request branch same"
+                  else
+                      eval "$(echo git remote add pullRequestOrigin https://github.com/$TRAVIS_PULL_REQUEST_SLUG.git)"
+                      git fetch pullRequestOrigin develop
+                      GIT_DIFF_RESULT=$(eval "$(echo bash diff_checking.sh remotes/pullRequestOrigin/develop remotes/origin/develop)")
+                      echo "pull request branch diffrent!!!"
+                  fi
               - IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
               - IS_CHANGED_BACK=$(echo $GIT_DIFF_RESULT | cut -d ',' -f2)
           script:
@@ -56,6 +64,7 @@ jobs:
                       yarn install
                       echo server~~~
                   fi
+
         #DEVEOP SERVER BUILD STAGE
         - stage: ‘DEV BUILD’
           before_script:
