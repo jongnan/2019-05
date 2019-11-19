@@ -25,8 +25,8 @@ jobs:
               - git remote add aa https://github.com/connect-foundation.git
           before_script:
               - git remote -v
+              - git pull aa develop:oDev
               - git branch -a
-              - glog
               - GIT_DIFF_RESULT=$(bash diff_checking.sh remotes/origin/test remotes/origin/develop)
               - IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
               - IS_CHANGED_BACK=$(echo $GIT_DIFF_RESULT | cut -d ',' -f2)
