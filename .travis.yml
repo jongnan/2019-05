@@ -21,7 +21,8 @@ jobs:
           name: ‘FRONT TEST’
           if: type = pull_request AND branch = develop
           install:
-              - eval "$(echo git remote add pullRequestOrigin https://github.com/$TRAVIS_PULL_REQUEST_SLUG.git)"
+              - GIT_REMOTE_CREATE_CMD=$(echo git remote add pullRequestOrigin https://github.com/$TRAVIS_PULL_REQUEST_SLUG.git)
+              - eval $GIT_REMOTE_CREATE_CMD
           before_script:
               - git branch -a
               - $TRAVIS_PULL_REQUEST_SHA
