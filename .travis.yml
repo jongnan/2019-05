@@ -23,8 +23,8 @@ jobs:
           before_script:
               - git branch -a
               - GIT_DIFF_RESULT=$(bash diff_checking.sh remotes/origin/test remotes/origin/develop)
-              - IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ‘,’ -f1)
-              - IS_CHANGED_BACK=$(echo $GIT_DIFF_RESULT | cut -d ‘,’ -f2)
+              - IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
+              - IS_CHANGED_BACK=$(echo $GIT_DIFF_RESULT | cut -d ',' -f2)
           script:
               - |
                   if [ $IS_CHANGED_FRONT == true ]; then
@@ -37,8 +37,8 @@ jobs:
           before_script:
               - git branch -a
               - GIT_DIFF_RESULT=$(bash diff_checking.sh remotes/origin/test remotes/origin/develop)
-              - IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ‘,’ -f1)
-              - IS_CHANGED_BACK=$(echo $GIT_DIFF_RESULT | cut -d ‘,’ -f2)
+              - IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
+              - IS_CHANGED_BACK=$(echo $GIT_DIFF_RESULT | cut -d ',' -f2)
           script:
               - |
                   if [ $IS_CHANGED_BACK == true ]; then
@@ -50,8 +50,8 @@ jobs:
         - stage: ‘DEV BUILD’
           before_script:
               - GIT_DIFF_RESULT=$(bash diff_checking.sh remotes/origin/develop remotes/upstream/develop)
-              - IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ‘,’ -f1)
-              - IS_CHANGED_BACK=$(echo $GIT_DIFF_RESULT | cut -d ‘,’ -f2)
+              - IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
+              - IS_CHANGED_BACK=$(echo $GIT_DIFF_RESULT | cut -d ',' -f2)
           name: ‘DEV SERVER FRONT BUILD’
           if: branch = develop AND type = push
           script:
@@ -62,8 +62,8 @@ jobs:
         - stage: ‘PROD BUILD’
           before_script:
               - GIT_DIFF_RESULT=$(bash diff_checking.sh remotes/upstream/develop remotes/upstream/master)
-              - IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ‘,’ -f1)
-              - IS_CHANGED_BACK=$(echo $GIT_DIFF_RESULT | cut -d ‘,’ -f2)
+              - IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
+              - IS_CHANGED_BACK=$(echo $GIT_DIFF_RESULT | cut -d ',' -f2)
           name: ‘PROD SERVER FRONT BUILD’
           if: branch = master AND type = push
           script:
