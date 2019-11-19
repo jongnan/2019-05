@@ -21,7 +21,7 @@ jobs:
           name: ‘FRONT TEST’
           if: type = pull_request AND branch = develop
           install:
-              - git remote add pullRequestOrigin https://github.com/$TRAVIS_PULL_REQUEST_SLUG.git
+              - git remote add pullRequestOrigin 'https://github.com/'$TRAVIS_PULL_REQUEST_SLUG'.git'
           before_script:
               - git branch -a
               - echo $TRAVIS_PULL_REQUEST_SHA
