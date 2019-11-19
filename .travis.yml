@@ -15,7 +15,7 @@ services:
     - docker
 
 before_script:
-    - git remote add upstream
+    - git branch -v
 
 jobs:
     include:
