@@ -15,18 +15,18 @@ services:
     - docker
 
 before_script:
-    - git branch -a
+    - git remote add upstream
 
 jobs:
     include:
         #PULL_REQUEST CHECKING STAGE
         - stage: ‘TEST’
-          before_script:
-              - GIT_DIFF_RESULT=$(bash diff_checking.sh remotes/origin/develop remotes/upstream/develop)
-              - IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ‘,’ -f1)
-              - IS_CHANGED_BACK=$(echo $GIT_DIFF_RESULT | cut -d ‘,’ -f2)
           name: ‘FRONT TEST’
           if: type = pull_request AND branch = develop
+          before_script:
+              - GIT_DIFF_RESULT=$(bash diff_checking.sh remotes/origin/test remotes/origin/develop)
+              - IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ‘,’ -f1)
+              - IS_CHANGED_BACK=$(echo $GIT_DIFF_RESULT | cut -d ‘,’ -f2)
           script:
               - |
                   if [ $IS_CHANGED_FRONT == true ]; then
@@ -36,6 +36,10 @@ jobs:
                   fi
         - name: ‘BACK TEST’
           if: type = pull_request AND branch = develop
+          before_script:
+              - GIT_DIFF_RESULT=$(bash diff_checking.sh remotes/origin/test remotes/origin/develop)
+              - IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ‘,’ -f1)
+              - IS_CHANGED_BACK=$(echo $GIT_DIFF_RESULT | cut -d ‘,’ -f2)
           script:
               - |
                   if [ $IS_CHANGED_BACK == true ]; then
