@@ -14,9 +14,6 @@ branches:
 services:
     - docker
 
-before_script:
-    - git branch -v
-
 jobs:
     include:
         #PULL_REQUEST CHECKING STAGE
@@ -24,6 +21,7 @@ jobs:
           name: ‘FRONT TEST’
           if: type = pull_request AND branch = develop
           before_script:
+              - git branch -a
               - GIT_DIFF_RESULT=$(bash diff_checking.sh remotes/origin/test remotes/origin/develop)
               - IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ‘,’ -f1)
               - IS_CHANGED_BACK=$(echo $GIT_DIFF_RESULT | cut -d ‘,’ -f2)
@@ -37,6 +35,7 @@ jobs:
         - name: ‘BACK TEST’
           if: type = pull_request AND branch = develop
           before_script:
+              - git branch -a
               - GIT_DIFF_RESULT=$(bash diff_checking.sh remotes/origin/test remotes/origin/develop)
               - IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ‘,’ -f1)
               - IS_CHANGED_BACK=$(echo $GIT_DIFF_RESULT | cut -d ‘,’ -f2)
