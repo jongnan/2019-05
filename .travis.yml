@@ -21,13 +21,13 @@ jobs:
           name: ‘FRONT TEST’
           if: type = pull_request AND branch = develop
           install:
-              - git remote add pullRequestOrigin 'https://github.com/'$TRAVIS_PULL_REQUEST_SLUG'.git'
+              - git remote add pullRequestOrigin https://github.com/$TRAVIS_PULL_REQUEST_SLUG.git
           before_script:
               - git branch -a
-              - echo $TRAVIS_PULL_REQUEST_SHA
-              - echo $TRAVIS_PULL_REQUEST_SLUG
-              - echo $TRAVIS_REPO_SLUG
-              - echo $TRAVIS_PULL_REQUEST_BRANCH
+              - $TRAVIS_PULL_REQUEST_SHA
+              - $TRAVIS_PULL_REQUEST_SLUG
+              - $TRAVIS_REPO_SLUG
+              - $TRAVIS_PULL_REQUEST_BRANCH
               - GIT_DIFF_RESULT=$(bash diff_checking.sh remotes/origin/test remotes/origin/develop)
               - IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
               - IS_CHANGED_BACK=$(echo $GIT_DIFF_RESULT | cut -d ',' -f2)
