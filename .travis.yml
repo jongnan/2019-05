@@ -22,16 +22,15 @@ jobs:
           if: type = pull_request AND branch = develop
           install:
               # - eval "$(echo git remote add pullRequestOrigin https://github.com/$TRAVIS_PULL_REQUEST_SLUG.git)"
-              - git remote add aa https://github.com/connect-foundation/2019-05.git
           before_script:
-              - git remote -v
-              - git pull aa develop:oDev
-
-              - GIT_DIFF_RESULT=$(bash diff_checking.sh remotes/origin/test remotes/origin/develop)
-              - IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
-              - IS_CHANGED_BACK=$(echo $GIT_DIFF_RESULT | cut -d ',' -f2)
           script:
               - |
+                  git remote add aa https://github.com/connect-foundation/2019-05.git
+                  git remote -v
+                  git pull aa develop:oDev
+                  GIT_DIFF_RESULT=$(bash diff_checking.sh remotes/origin/test remotes/origin/develop)
+                  IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
+                  IS_CHANGED_BACK=$(echo $GIT_DIFF_RESULT | cut -d ',' -f2)
                   if [ $IS_CHANGED_FRONT == true ]; then
                       cd client
                       yarn install
