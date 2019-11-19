@@ -24,7 +24,7 @@ jobs:
               - eval "$(echo git remote add pullRequestOrigin https://github.com/$TRAVIS_PULL_REQUEST_SLUG.git)"
           before_script:
               - git remote -v
-              - git checkout pullRequestOrigin/develop
+              - git checkout remotes/pullRequestOrigin/develop
               - glog
               - GIT_DIFF_RESULT=$(bash diff_checking.sh remotes/origin/test remotes/origin/develop)
               - IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
