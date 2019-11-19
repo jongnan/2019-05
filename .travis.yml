@@ -24,7 +24,8 @@ jobs:
               # - eval "$(echo git remote add pullRequestOrigin https://github.com/$TRAVIS_PULL_REQUEST_SLUG.git)"
               - git remote add aa https://github.com/connect-foundation/2019-05.git
               - git remote -v
-              - git fetch aa develop:oDev
+              - git fetch aa develop
+              - git diff remotes/aa/develop..remotes/origin/develop --name-only
               - git branch -a
               - GIT_DIFF_RESULT=$(bash diff_checking.sh remotes/origin/test remotes/origin/develop)
               - IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
