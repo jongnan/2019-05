@@ -21,10 +21,11 @@ jobs:
           name: ‘FRONT TEST’
           if: type = pull_request AND branch = develop
           install:
-              - eval "$(echo git remote add pullRequestOrigin https://github.com/$TRAVIS_PULL_REQUEST_SLUG.git)"
+              # - eval "$(echo git remote add pullRequestOrigin https://github.com/$TRAVIS_PULL_REQUEST_SLUG.git)"
+              - git remote add aa https://github.com/connect-foundation.git
           before_script:
               - git remote -v
-              - git checkout remotes/pullRequestOrigin/develop
+              - git branch -a
               - glog
               - GIT_DIFF_RESULT=$(bash diff_checking.sh remotes/origin/test remotes/origin/develop)
               - IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
