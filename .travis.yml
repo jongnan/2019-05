@@ -34,12 +34,11 @@ branches:
 
 jobs:
   include:
-    - stage: '1'
-      name: 'aa'
-      script: echo 'aaaaa'
-    - stage: '2'
-      name: 'bb'
-      script: echo 'bbbbb'
+    - stage: 'TEST'
+      name: 'FRONT'
+      script: echo 'front'
+    - name: 'BACK'
+      script: echo 'dev!'
 # jobs:
 #   include:
 #     #PULL_REQUEST CHECKING STAGE
