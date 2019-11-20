@@ -27,20 +27,19 @@ jobs:
       if: type = push
       script:
         - |
-          if [ -z "$TRAVIS_PULL_REQUEST_SLUG" ]; then
-            echo "is null!"
-          else
-            echo "not null"
-          fi
-
           if [ "$TRAVIS_PULL_REQUEST_SLUG" = "$TRAVIS_REPO_SLUG" ]; then
             echo 'Push or Pull Request from same remote branch'
             GIT_DIFF_RESULT=$(eval "$(echo bash diff_checking.sh remotes/origin/$TRAVIS_REPO_SLUG remotes/origin/develop)")
           else
-            echo 'Push or Pull Request from another remote branch'
-            eval "$(echo git remote add prBranch https://github.com/$TRAVIS_PULL_REQUEST_SLUG.git)"
-            git fetch prBranch develop
-            GIT_DIFF_RESULT=$(eval "$(echo bash diff_checking.sh remotes/prBranch/develop remotes/origin/develop)")
+            if [ -z "$TRAVIS_PULL_REQUEST_SLUG" ]; then
+              echo 'Push!!'
+              GIT_DIFF_RESULT=$(eval "$(echo bash diff_checking.sh remotes/origin/$TRAVIS_REPO_SLUG remotes/origin/develop)")
+            else
+              echo 'Push or Pull Request from another remote branch'
+              eval "$(echo git remote add prBranch https://github.com/$TRAVIS_PULL_REQUEST_SLUG.git)"
+              git fetch prBranch develop
+              GIT_DIFF_RESULT=$(eval "$(echo bash diff_checking.sh remotes/prBranch/develop remotes/origin/develop)")
+            fi
           fi
 
           IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
@@ -62,11 +61,17 @@ jobs:
             echo 'Push or Pull Request from same remote branch'
             GIT_DIFF_RESULT=$(eval "$(echo bash diff_checking.sh remotes/origin/$TRAVIS_REPO_SLUG remotes/origin/develop)")
           else
-            echo 'Push or Pull Request from another remote branch'
-            eval "$(echo git remote add prBranch https://github.com/$TRAVIS_PULL_REQUEST_SLUG.git)"
-            git fetch prBranch develop
-            GIT_DIFF_RESULT=$(eval "$(echo bash diff_checking.sh remotes/prBranch/develop remotes/origin/develop)")
+            if [ -z "$TRAVIS_PULL_REQUEST_SLUG" ]; then
+              echo 'Push!!'
+              GIT_DIFF_RESULT=$(eval "$(echo bash diff_checking.sh remotes/origin/$TRAVIS_REPO_SLUG remotes/origin/develop)")
+            else
+              echo 'Push or Pull Request from another remote branch'
+              eval "$(echo git remote add prBranch https://github.com/$TRAVIS_PULL_REQUEST_SLUG.git)"
+              git fetch prBranch develop
+              GIT_DIFF_RESULT=$(eval "$(echo bash diff_checking.sh remotes/prBranch/develop remotes/origin/develop)")
+            fi
           fi
+
           IS_CHANGED_BACK=$(echo $GIT_DIFF_RESULT | cut -d ',' -f2)
           if [ $IS_CHANGED_BACK == true ]; then
             echo 'Back test start!'
