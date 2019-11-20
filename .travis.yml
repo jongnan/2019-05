@@ -21,7 +21,7 @@ branches:
 
 jobs:
   include:
-    - before_script:
+    - script:
       - |
         if [ $TRAVIS_PULL_REQUEST_SLUG == $TRAVIS_REPO_SLUG ]; then
           echo 'Push or Pull Request from same remote branch'
@@ -33,7 +33,8 @@ jobs:
         fi
       - IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
       - IS_CHANGED_BACK=$(echo $GIT_DIFF_RESULT | cut -d ',' -f2)
-      #PULL_REQUEST CHECKING STAGE
+    
+    #PULL_REQUEST CHECKING STAGE
     - stage: 'DEV TEST'
       name: 'FRONT TEST'
       if: type = pull_request
