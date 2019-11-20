@@ -19,7 +19,7 @@ branches:
     - develop
     - test
 
-before_script:
+install:
   - |
     if [ $TRAVIS_PULL_REQUEST_SLUG == $TRAVIS_REPO_SLUG ]; then
       echo 'Push or Pull Request from same remote branch'
