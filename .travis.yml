@@ -32,7 +32,7 @@ jobs:
         - yarn
       script:
         - |
-          if [ $IS_CHANGED_FRONT = true ]; then
+          if [ $IS_CHANGED_FRONT == true ]; then
             echo 'Front test start!'
             yarn test
             echo 'test done...'
@@ -46,7 +46,7 @@ jobs:
         - |
           GIT_DIFF_RESULT=$(eval bash common_job.sh)
           IS_CHANGED_BACK=$(echo $GIT_DIFF_RESULT | cut -d ',' -f2)
-          if [ $IS_CHANGED_BACK = true ]; then
+          if [ $IS_CHANGED_BACK == true ]; then
             echo 'Back test start!'
             cd server
             yarn install
@@ -63,7 +63,7 @@ jobs:
         - |
           GIT_DIFF_RESULT=$(eval bash common_job.sh)
           IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
-          if [ $IS_CHANGED_FRONT = true]; then
+          if [ $IS_CHANGED_FRONT == true]; then
             echo 'Develop server front build start!'
             echo 'build done...'
           fi
@@ -74,7 +74,7 @@ jobs:
         - |
           GIT_DIFF_RESULT=$(eval bash common_job.sh)
           IS_CHANGED_BACK=$(echo $GIT_DIFF_RESULT | cut -d ',' -f2)
-          if [ $IS_CHANGED_BACK = "true"]; then
+          if [ $IS_CHANGED_BACK == "true"]; then
             echo 'Develop server back build start!'
             echo 'build done...'
           fi
@@ -87,7 +87,7 @@ jobs:
         - |
           GIT_DIFF_RESULT=$(eval bash common_job.sh)
           IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
-          if [ $IS_CHANGED_FRONT = true]; then
+          if [ $IS_CHANGED_FRONT == true]; then
             echo 'Product server front build start!'
             echo 'build done...'
           fi
@@ -98,7 +98,7 @@ jobs:
         - |
           GIT_DIFF_RESULT=$(eval bash common_job.sh)
           IS_CHANGED_BACK=$(echo $GIT_DIFF_RESULT | cut -d ',' -f2)
-          if [ $IS_CHANGED_BACK = true]; then
+          if [ $IS_CHANGED_BACK == true]; then
             echo 'Product server back build start!'
             echo 'build done...'
           fi
