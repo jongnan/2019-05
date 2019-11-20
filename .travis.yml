@@ -8,9 +8,9 @@ cache:
 
 git:
     depth: false
-# services:
-# 		- docker
 
+services:
+    - docker
 # branches:
 # 		only:
 # 				- master
