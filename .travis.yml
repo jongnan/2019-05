@@ -38,30 +38,30 @@ jobs:
     - stage: 'DEV TEST'
       name: 'FRONT TEST'
       if: type = pull_request
-      script:
-        - |
-          if [ $IS_CHANGED_FRONT == true ]; then
-            echo 'Front test start!'
-            cd client
-            yarn install
-            yarn test
-            echo 'test done...'
-          else
-            echo 'Front isn't changed...'
-          fi
 
+      # script:
+      #   - |
+      #     if [ $IS_CHANGED_FRONT == true ]; then
+      #       echo 'Front test start!'
+      #       cd client
+      #       yarn install
+      #       yarn test
+      #       echo 'test done...'
+      #     else
+      #       echo 'Front isn't changed...'
+      #     fi
     - name: 'BACK TEST'
       if: type = pull_request
-      script:
-        - |
-          if [ $IS_CHANGED_BACK == true ]; then
-            echo 'Back test start!'
-            cd server
-            yarn install
-            echo 'test done...'
-          else
-            echo 'Back is not changed...'
-          fi
+      # script:
+      #   - |
+      #     if [ $IS_CHANGED_BACK == true ]; then
+      #       echo 'Back test start!'
+      #       cd server
+      #       yarn install
+      #       echo 'test done...'
+      #     else
+      #       echo 'Back is not changed...'
+      #     fi
 
 # #DEVELOP SERVER BUILD STAGE
 # - stage: 'DEV BUILD'
