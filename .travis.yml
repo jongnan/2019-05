@@ -38,7 +38,8 @@ jobs:
         - IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
       script:
         - |
-          if [ $IS_CHANGED_FRONT == "true" ]; then
+          echo $IS_CHANGED_FRONT
+          if [ $IS_CHANGED_FRONT == true ]; then
             echo 'Front test start!'
             cd client
             yarn install
@@ -63,7 +64,8 @@ jobs:
         - IS_CHANGED_BACK=$(echo $GIT_DIFF_RESULT | cut -d ',' -f2)
       script:
         - |
-          if [ $IS_CHANGED_BACK == "true" ]; then
+          echo $IS_CHANGED_BACK
+          if [ $IS_CHANGED_BACK == true ]; then
             echo 'Back test start!'
             cd server
             yarn install
