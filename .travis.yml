@@ -27,6 +27,8 @@ jobs:
       if: type = push
       script:
         - |
+          git branch -a
+
           if [ "$TRAVIS_PULL_REQUEST_SLUG" = "$TRAVIS_REPO_SLUG" ]; then
             echo 'Push or Pull Request from same remote branch'
             GIT_DIFF_RESULT=$(eval "$(echo bash diff_checking.sh remotes/origin/$TRAVIS_REPO_SLUG remotes/origin/develop)")
