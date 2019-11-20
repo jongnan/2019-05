@@ -4,7 +4,7 @@ IS_CLIENT_PUSHED=false
 IS_SERVER_PUSHED=false
 while read diff_file_name; do
  client_regx="(^client/)"
- server_regx="(^server/)""
+ server_regx="(^server/)"
  if [[ $diff_file_name =~ $client_regx ]]; then
    if [ $IS_CLIENT_PUSHED = false ]; then
      IS_CLIENT_PUSHED=true
