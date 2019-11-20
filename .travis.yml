@@ -1,12 +1,12 @@
 language: node_js
 
 node_js:
-	- 12.13
+		- 12.13
 
 cache:
-	- npm
-	- yarn
-	
+		- npm
+		- yarn
+
 # node_js:
 # 		- 12.13
 
