@@ -25,20 +25,18 @@ jobs:
     - stage: 'TEST'
       name: 'FRONT TEST'
       if: type = push
-      before_script:
+      script:
         - |
           if [ $TRAVIS_PULL_REQUEST_SLUG == $TRAVIS_REPO_SLUG ]; then
             echo 'Push or Pull Request from same remote branch'
             GIT_DIFF_RESULT=$(eval "$(echo bash diff_checking.sh remotes/origin/$TRAVIS_PULL_REQUEST_BRANCH remotes/origin/develop)")
+          else
             echo 'Push or Pull Request from another remote branch'
             eval "$(echo git remote add prBranch https://github.com/$TRAVIS_PULL_REQUEST_SLUG.git)"
             git fetch prBranch develop
             GIT_DIFF_RESULT=$(eval "$(echo bash diff_checking.sh remotes/prBranch/develop remotes/origin/develop)")
           fi
-        - IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
-      script:
-        - |
-          echo $IS_CHANGED_FRONT
+          IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
           if [ $IS_CHANGED_FRONT == true ]; then
             echo 'Front test start!'
             cd client
@@ -51,20 +49,18 @@ jobs:
 
     - name: 'BACK TEST'
       if: type = push
-      before_script:
+      script:
         - |
           if [ $TRAVIS_PULL_REQUEST_SLUG == $TRAVIS_REPO_SLUG ]; then
             echo 'Push or Pull Request from same remote branch'
             GIT_DIFF_RESULT=$(eval "$(echo bash diff_checking.sh remotes/origin/$TRAVIS_PULL_REQUEST_BRANCH remotes/origin/develop)")
+          else
             echo 'Push or Pull Request from another remote branch'
             eval "$(echo git remote add prBranch https://github.com/$TRAVIS_PULL_REQUEST_SLUG.git)"
             git fetch prBranch develop
             GIT_DIFF_RESULT=$(eval "$(echo bash diff_checking.sh remotes/prBranch/develop remotes/origin/develop)")
           fi
-        - IS_CHANGED_BACK=$(echo $GIT_DIFF_RESULT | cut -d ',' -f2)
-      script:
-        - |
-          echo $IS_CHANGED_BACK
+          IS_CHANGED_BACK=$(echo $GIT_DIFF_RESULT | cut -d ',' -f2)
           if [ $IS_CHANGED_BACK == true ]; then
             echo 'Back test start!'
             cd server
@@ -78,19 +74,18 @@ jobs:
     - stage: 'DEV BUILD'
       name: 'DEV SERVER FRONT BUILD'
       if: branch = develop AND type = push
-      before_script:
+      script:
         - |
           if [ $TRAVIS_PULL_REQUEST_SLUG == $TRAVIS_REPO_SLUG ]; then
             echo 'Push or Pull Request from same remote branch'
             GIT_DIFF_RESULT=$(eval "$(echo bash diff_checking.sh remotes/origin/$TRAVIS_PULL_REQUEST_BRANCH remotes/origin/develop)")
+          else
             echo 'Push or Pull Request from another remote branch'
             eval "$(echo git remote add prBranch https://github.com/$TRAVIS_PULL_REQUEST_SLUG.git)"
             git fetch prBranch develop
             GIT_DIFF_RESULT=$(eval "$(echo bash diff_checking.sh remotes/prBranch/develop remotes/origin/develop)")
           fi
-        - IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
-      script:
-        - |
+          IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
           if [ $IS_CHANGED_FRONT == true]; then
             echo 'Develop server front build start!'
             echo 'build done...'
@@ -98,19 +93,18 @@ jobs:
 
     - name: 'DEV SERVER BACK BUILD'
       if: branch = develop AND type = push
-      before_script:
+      script:
         - |
           if [ $TRAVIS_PULL_REQUEST_SLUG == $TRAVIS_REPO_SLUG ]; then
             echo 'Push or Pull Request from same remote branch'
             GIT_DIFF_RESULT=$(eval "$(echo bash diff_checking.sh remotes/origin/$TRAVIS_PULL_REQUEST_BRANCH remotes/origin/develop)")
+          else
             echo 'Push or Pull Request from another remote branch'
             eval "$(echo git remote add prBranch https://github.com/$TRAVIS_PULL_REQUEST_SLUG.git)"
             git fetch prBranch develop
             GIT_DIFF_RESULT=$(eval "$(echo bash diff_checking.sh remotes/prBranch/develop remotes/origin/develop)")
           fi
-        - IS_CHANGED_BACK=$(echo $GIT_DIFF_RESULT | cut -d ',' -f2)
-      script:
-        - |
+          IS_CHANGED_BACK=$(echo $GIT_DIFF_RESULT | cut -d ',' -f2)
           if [ $IS_CHANGED_BACK == "true"]; then
             echo 'Develop server back build start!'
             echo 'build done...'
@@ -120,19 +114,18 @@ jobs:
     - stage: 'PROD BUILD'
       name: 'PROD SERVER FRONT BUILD'
       if: branch = master AND type = push
-      before_script:
+      script:
         - |
           if [ $TRAVIS_PULL_REQUEST_SLUG == $TRAVIS_REPO_SLUG ]; then
             echo 'Push or Pull Request from same remote branch'
             GIT_DIFF_RESULT=$(eval "$(echo bash diff_checking.sh remotes/origin/$TRAVIS_PULL_REQUEST_BRANCH remotes/origin/develop)")
+          else
             echo 'Push or Pull Request from another remote branch'
             eval "$(echo git remote add prBranch https://github.com/$TRAVIS_PULL_REQUEST_SLUG.git)"
             git fetch prBranch develop
             GIT_DIFF_RESULT=$(eval "$(echo bash diff_checking.sh remotes/prBranch/develop remotes/origin/develop)")
           fi
-        - IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
-      script:
-        - |
+          IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
           if [ $IS_CHANGED_FRONT == true]; then
             echo 'Product server front build start!'
             echo 'build done...'
@@ -140,19 +133,18 @@ jobs:
 
     - name: 'PROD SERVER BACK BUILD'
       if: branch = master AND type = push
-      before_script:
+      script:
         - |
           if [ $TRAVIS_PULL_REQUEST_SLUG == $TRAVIS_REPO_SLUG ]; then
             echo 'Push or Pull Request from same remote branch'
             GIT_DIFF_RESULT=$(eval "$(echo bash diff_checking.sh remotes/origin/$TRAVIS_PULL_REQUEST_BRANCH remotes/origin/develop)")
+          else
             echo 'Push or Pull Request from another remote branch'
             eval "$(echo git remote add prBranch https://github.com/$TRAVIS_PULL_REQUEST_SLUG.git)"
             git fetch prBranch develop
             GIT_DIFF_RESULT=$(eval "$(echo bash diff_checking.sh remotes/prBranch/develop remotes/origin/develop)")
           fi
-        - IS_CHANGED_BACK=$(echo $GIT_DIFF_RESULT | cut -d ',' -f2)
-      script:
-        - |
+          IS_CHANGED_BACK=$(echo $GIT_DIFF_RESULT | cut -d ',' -f2)
           if [ $IS_CHANGED_BACK == true]; then
             echo 'Product server back build start!'
             echo 'build done...'
