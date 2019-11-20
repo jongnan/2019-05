@@ -39,16 +39,16 @@ jobs:
       if: type = pull_request
       script:
         - echo "aaa"
-        # - |
-        #   if [ $IS_CHANGED_FRONT == true ]; then
-        #     echo 'Front test start!'
-        #     cd client
-        #     yarn install
-        #     yarn test
-        #     echo 'test done...'
-        #   else
-        #     echo 'Front isn't changed...'
-        #   fi
+          # - |
+          #   if [ $IS_CHANGED_FRONT == true ]; then
+          #     echo 'Front test start!'
+          #     cd client
+          #     yarn install
+          #     yarn test
+          #     echo 'test done...'
+          #   else
+          #     echo 'Front isn't changed...'
+          #   fi
     - name: 'BACK TEST'
       if: type = pull_request
       script:
@@ -82,18 +82,18 @@ jobs:
           #     echo 'Develop server back build start!'
           #     echo 'build done...'
           #   fi
-    #PRODUCT SERVER BUILD STAGE
-    - stage: 'PROD BUILD'
-      name: 'PROD SERVER FRONT BUILD'
-      if: branch = master AND type = push
-      script:
-        - echo "aaa"
-          # - |
-          #   if [ $IS_CHANGED_FRONT == true]; then
-          #     echo 'Product server front build start!'
-          #     echo 'build done...'
-          #   fi
-    - name: 'PROD SERVER BACK BUILD'
-      if: branch = master AND type = push
-      script:
-        - echo "aaa"
+      # #PRODUCT SERVER BUILD STAGE
+      # - stage: 'PROD BUILD'
+      #   name: 'PROD SERVER FRONT BUILD'
+      #   if: branch = master AND type = push
+      #   script:
+      #     - echo "aaa"
+      #       # - |
+      #       #   if [ $IS_CHANGED_FRONT == true]; then
+      #       #     echo 'Product server front build start!'
+      #       #     echo 'build done...'
+      #       #   fi
+      # - name: 'PROD SERVER BACK BUILD'
+      #   if: branch = master AND type = push
+      #   script:
+      #     - echo "aaa"
