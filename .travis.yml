@@ -50,7 +50,7 @@ jobs:
             yarn test
             echo 'test done...'
           else
-            echo 'Front isn't changed...'
+            echo 'Front is not changed...'
           fi
 
     - name: 'BACK TEST'
