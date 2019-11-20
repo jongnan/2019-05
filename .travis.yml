@@ -36,10 +36,9 @@ jobs:
             GIT_DIFF_RESULT=$(eval "$(echo bash diff_checking.sh remotes/prBranch/develop remotes/origin/develop)")
           fi
         - IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
-        - IS_CHANGED_BACK=$(echo $GIT_DIFF_RESULT | cut -d ',' -f2)
       script:
         - |
-          if [ $IS_CHANGED_FRONT == true ]; then
+          if [ $IS_CHANGED_FRONT == "true" ]; then
             echo 'Front test start!'
             cd client
             yarn install
@@ -61,11 +60,10 @@ jobs:
             git fetch prBranch develop
             GIT_DIFF_RESULT=$(eval "$(echo bash diff_checking.sh remotes/prBranch/develop remotes/origin/develop)")
           fi
-        - IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
         - IS_CHANGED_BACK=$(echo $GIT_DIFF_RESULT | cut -d ',' -f2)
       script:
         - |
-          if [ $IS_CHANGED_BACK == true ]; then
+          if [ $IS_CHANGED_BACK == "true" ]; then
             echo 'Back test start!'
             cd server
             yarn install
@@ -89,7 +87,6 @@ jobs:
             GIT_DIFF_RESULT=$(eval "$(echo bash diff_checking.sh remotes/prBranch/develop remotes/origin/develop)")
           fi
         - IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
-        - IS_CHANGED_BACK=$(echo $GIT_DIFF_RESULT | cut -d ',' -f2)
       script:
         - |
           if [ $IS_CHANGED_FRONT == true]; then
@@ -109,11 +106,10 @@ jobs:
             git fetch prBranch develop
             GIT_DIFF_RESULT=$(eval "$(echo bash diff_checking.sh remotes/prBranch/develop remotes/origin/develop)")
           fi
-        - IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
         - IS_CHANGED_BACK=$(echo $GIT_DIFF_RESULT | cut -d ',' -f2)
       script:
         - |
-          if [ $IS_CHANGED_BACK == true]; then
+          if [ $IS_CHANGED_BACK == "true"]; then
             echo 'Develop server back build start!'
             echo 'build done...'
           fi
@@ -133,7 +129,6 @@ jobs:
             GIT_DIFF_RESULT=$(eval "$(echo bash diff_checking.sh remotes/prBranch/develop remotes/origin/develop)")
           fi
         - IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
-        - IS_CHANGED_BACK=$(echo $GIT_DIFF_RESULT | cut -d ',' -f2)
       script:
         - |
           if [ $IS_CHANGED_FRONT == true]; then
@@ -153,7 +148,6 @@ jobs:
             git fetch prBranch develop
             GIT_DIFF_RESULT=$(eval "$(echo bash diff_checking.sh remotes/prBranch/develop remotes/origin/develop)")
           fi
-        - IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
         - IS_CHANGED_BACK=$(echo $GIT_DIFF_RESULT | cut -d ',' -f2)
       script:
         - |
