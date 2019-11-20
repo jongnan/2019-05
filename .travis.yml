@@ -1,21 +1,22 @@
 language: node_js
-# node_js:
-#   - 12.13
 
-# cache:
-# 	- npm
-# 	- yarn
+node_js:
+    - 12.13
 
-# git:
-#   depth: false
+cache:
+    - npm
+    - yarn
 
-# services:
-#   - docker
+git:
+  depth: false
 
-# branches:
-#   only:
-# 		- master
-# 		- develop
+services:
+  - docker
+
+branches:
+  only:
+	- master
+	- develop
 
 # before_script:
 # 	- |
