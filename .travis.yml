@@ -24,10 +24,13 @@ jobs:
     - stage: 'TEST'
       name: 'FRONT TEST'
       if: type = pull_request
+      before_script:
+        - GIT_DIFF_RESULT=$(eval bash common_job.sh)
+        - eval bash common_job.sh
+        - echo $GIT_DIFF_RESULT
+        - IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
       script:
         - |
-          GIT_DIFF_RESULT=$(eval bash common_job.sh)
-          IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
           if [ $IS_CHANGED_FRONT = true ]; then
             echo 'Front test start!'
             cd client
@@ -37,7 +40,6 @@ jobs:
           else
             echo 'Front is not changed...'
           fi
-        - echo $GIT_DIFF_RESULT
 
     - name: 'BACK TEST'
       if: type = pull_request
