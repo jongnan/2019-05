@@ -11,11 +11,10 @@ git:
 
 services:
     - docker
-
-branches:
-	only:
-		- master
-		- test
+# branches:
+# 	only:
+# 		- master
+# 		- test
 
 # before_script:
 # 	- |
