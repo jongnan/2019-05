@@ -29,13 +29,16 @@ jobs:
         - IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
         - |
           if [ $IS_CHANGED_FRONT != true ]; then 
+            echo 'Front directory not change'
             exit 0 
           fi
         - cd client
       install:
         - yarn
       script:
+        - echo 'Front test start!'
         - yarn test
+        - echo 'Front test done...'
 
     - name: 'BACK TEST'
       if: type = pull_request
@@ -43,14 +46,17 @@ jobs:
         - GIT_DIFF_RESULT=$(eval bash common_job.sh)
         - IS_CHANGED_BACK=$(echo $GIT_DIFF_RESULT | cut -d ',' -f2)
         - |
-          if [ $IS_CHANGED_BACK != true ]; then 
+          if [ $IS_CHANGED_BACK != true ]; then
+            echo 'Back directory not change'
             exit 0 
           fi
         - cd server
       install:
-        - yarn
+        - npm
       script:
-        - echo 'server test!'
+        - echo 'Server test start!'
+        - npm test
+        - echo 'Server test done...'
 
     #DEVELOP SERVER BUILD STAGE
     - stage: 'DEV BUILD'
@@ -61,12 +67,13 @@ jobs:
         - IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
         - |
           if [ $IS_CHANGED_FRONT != true ]; then 
+            echo 'Front directory not change'
             exit 0 
           fi
         - cd client
       install:
         - yarn
-      script:
+      script: skip
 
     - name: 'DEV SERVER BACK BUILD'
       if: branch = develop AND type = push
@@ -75,12 +82,13 @@ jobs:
         - IS_CHANGED_BACK=$(echo $GIT_DIFF_RESULT | cut -d ',' -f2)
         - |
           if [ $IS_CHANGED_BACK != true ]; then 
+            echo 'Back directory not change'
             exit 0 
           fi
         - cd server
       install:
         - yarn
-      script:
+      script: skip
 
     #PRODUCT SERVER BUILD STAGE
     - stage: 'PROD BUILD'
@@ -91,12 +99,13 @@ jobs:
         - IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
         - |
           if [ $IS_CHANGED_FRONT != true ]; then 
+            echo 'Front directory not change'
             exit 0 
           fi
         - cd client
       install:
         - yarn
-      script:
+      script: skip
 
     - name: 'PROD SERVER BACK BUILD'
       if: branch = master AND type = push
@@ -104,10 +113,11 @@ jobs:
         - GIT_DIFF_RESULT=$(eval bash common_job.sh)
         - IS_CHANGED_BACK=$(echo $GIT_DIFF_RESULT | cut -d ',' -f2)
         - |
-          if [ $IS_CHANGED_BACK != true ]; then 
+          if [ $IS_CHANGED_BACK != true ]; then
+            echo 'Back directory not change'
             exit 0 
           fi
         - cd server
       install:
         - yarn
-      script:
+      script: skip
