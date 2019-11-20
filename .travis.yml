@@ -3,8 +3,7 @@ language: node_js
 node_js:
   - 12.13
 
-cache:
-  - npm
+cache: npm
 
 git:
   depth: false
@@ -13,7 +12,7 @@ services:
   - docker
 
 branches:
-	only:
+  only:
 		- master
 		- test
 
