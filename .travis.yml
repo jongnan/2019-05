@@ -27,7 +27,10 @@ jobs:
       before_install:
         - GIT_DIFF_RESULT=$(eval bash common_job.sh)
         - IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
-        - if [ $IS_CHANGED_FRONT != true ]; then exit 0 fi
+        - |
+          if [ $IS_CHANGED_FRONT != true ]; then 
+            exit 0 
+          fi
         - cd client
       install:
         - yarn
