@@ -37,7 +37,6 @@ jobs:
     - stage: 'DEV TEST'
       name: 'FRONT TEST'
       if: type = pull_request
-
       script:
         - |
           if [ $IS_CHANGED_FRONT == true ]; then
@@ -91,9 +90,3 @@ jobs:
           fi
     - name: 'PROD SERVER BACK BUILD'
       if: branch = master AND type = push
-      script:
-        - |
-          if [ $IS_CHANGED_BACK == true]; then
-            echo 'Product server back build start!'
-            echo 'build done...'
-          fi
