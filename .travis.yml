@@ -27,19 +27,12 @@ jobs:
       before_install:
         - GIT_DIFF_RESULT=$(eval bash common_job.sh)
         - IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
+        - if [ $IS_CHANGED_FRONT != true ]; then exit 0 fi
         - cd client
       install:
         - yarn
       script:
         - yarn test
-        # - |
-        #   if [ $IS_CHANGED_FRONT == true ]; then
-        #     echo 'Front test start!'
-        #     yarn test
-        #     echo 'test done...'
-        #   else
-        #     echo 'Front is not changed...'
-        #   fi
 
     - name: 'BACK TEST'
       if: type = pull_request
