@@ -11,12 +11,12 @@ git:
   depth: false
 
 services:
-  - docker
+    - docker
 
 branches:
-  only:
-	- master
-	- develop
+    only:
+	    - master
+	    - develop
 
 # before_script:
 # 	- |
