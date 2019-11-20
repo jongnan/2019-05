@@ -27,7 +27,6 @@ jobs:
       script:
         - |
           GIT_DIFF_RESULT=$(echo bash common_job.sh)
-          echo $GIT_DIFF_RESULT
           IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
           if [ $IS_CHANGED_FRONT = true ]; then
             echo 'Front test start!'
@@ -38,6 +37,7 @@ jobs:
           else
             echo 'Front is not changed...'
           fi
+        - echo $GIT_DIFF_RESULT
 
     - name: 'BACK TEST'
       if: type = pull_request
