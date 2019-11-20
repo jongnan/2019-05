@@ -15,6 +15,7 @@ services:
 branches:
 	only:
 		- master
+		- test
 
 # before_script:
 # 	- |
