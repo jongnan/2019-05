@@ -62,7 +62,7 @@ jobs:
     - stage: 'DEV BUILD'
       name: 'DEV SERVER FRONT BUILD'
       if: branch = develop AND type = push
-      before_install:
+      before_script:
         - GIT_DIFF_RESULT=$(eval bash common_job.sh)
         - IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
         - |
@@ -70,14 +70,11 @@ jobs:
             echo 'Front directory not change'
             exit 0 
           fi
-        - cd client
-      install:
-        - yarn
       script: skip
 
     - name: 'DEV SERVER BACK BUILD'
       if: branch = develop AND type = push
-      before_install:
+      before_script:
         - GIT_DIFF_RESULT=$(eval bash common_job.sh)
         - IS_CHANGED_BACK=$(echo $GIT_DIFF_RESULT | cut -d ',' -f2)
         - |
@@ -85,16 +82,13 @@ jobs:
             echo 'Back directory not change'
             exit 0 
           fi
-        - cd server
-      install:
-        - yarn
       script: skip
 
     #PRODUCT SERVER BUILD STAGE
     - stage: 'PROD BUILD'
       name: 'PROD SERVER FRONT BUILD'
       if: branch = master AND type = push
-      before_install:
+      before_script:
         - GIT_DIFF_RESULT=$(eval bash common_job.sh)
         - IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
         - |
@@ -102,14 +96,11 @@ jobs:
             echo 'Front directory not change'
             exit 0 
           fi
-        - cd client
-      install:
-        - yarn
       script: skip
 
     - name: 'PROD SERVER BACK BUILD'
       if: branch = master AND type = push
-      before_install:
+      before_script:
         - GIT_DIFF_RESULT=$(eval bash common_job.sh)
         - IS_CHANGED_BACK=$(echo $GIT_DIFF_RESULT | cut -d ',' -f2)
         - |
@@ -117,7 +108,4 @@ jobs:
             echo 'Back directory not change'
             exit 0 
           fi
-        - cd server
-      install:
-        - yarn
       script: skip
