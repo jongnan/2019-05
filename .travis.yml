@@ -5,6 +5,7 @@ node_js:
 
 cache:
     - npm
+		- yarn
 # git:
 #   	depth: false
 
