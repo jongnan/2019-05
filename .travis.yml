@@ -13,7 +13,9 @@ services:
     - docker
 
 branches:
-	- master
+	only:
+		- master
+
 # before_script:
 # 	- |
 # 		if [ $TRAVIS_PULL_REQUEST_SLUG == $TRAVIS_REPO_SLUG ]; then
