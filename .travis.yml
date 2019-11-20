@@ -26,7 +26,6 @@ jobs:
       if: type = pull_request
       before_script:
         - GIT_DIFF_RESULT=$(eval bash common_job.sh)
-        - eval bash common_job.sh
         - echo $GIT_DIFF_RESULT
         - IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
       script:
