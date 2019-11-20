@@ -31,14 +31,15 @@ jobs:
       install:
         - yarn
       script:
-        - |
-          if [ $IS_CHANGED_FRONT == true ]; then
-            echo 'Front test start!'
-            yarn test
-            echo 'test done...'
-          else
-            echo 'Front is not changed...'
-          fi
+        - yarn test
+        # - |
+        #   if [ $IS_CHANGED_FRONT == true ]; then
+        #     echo 'Front test start!'
+        #     yarn test
+        #     echo 'test done...'
+        #   else
+        #     echo 'Front is not changed...'
+        #   fi
 
     - name: 'BACK TEST'
       if: type = pull_request
