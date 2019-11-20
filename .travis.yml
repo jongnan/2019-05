@@ -17,7 +17,6 @@ branches:
   only:
     - master
     - develop
-    - test
 
 jobs:
   include:
@@ -27,6 +26,8 @@ jobs:
       if: type = push OR type = pull_request
       script:
         - |
+          bash test.sh
+
           if [ -z "$TRAVIS_PULL_REQUEST_SLUG" ]; then
             echo 'Push!!'
             GIT_DIFF_RESULT=$(eval $(echo bash diff_checking.sh remotes/origin/$TRAVIS_BRANCH remotes/origin/develop))
