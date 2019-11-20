@@ -23,12 +23,13 @@ jobs:
     #PULL_REQUEST CHECKING STAGE
     - stage: 'TEST'
       name: 'FRONT TEST'
-      if: type = push OR type = pull_request
+      if: type = pull_request
       script:
         - |
           GIT_DIFF_RESULT=$(echo bash common_job.sh)
+          echo $GIT_DIFF_RESULT
           IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
-          if [ "$IS_CHANGED_FRONT" = "true" ]; then
+          if [ $IS_CHANGED_FRONT = true ]; then
             echo 'Front test start!'
             cd client
             yarn install
@@ -39,12 +40,12 @@ jobs:
           fi
 
     - name: 'BACK TEST'
-      if: type = push OR type = pull_request
+      if: type = pull_request
       script:
         - |
           GIT_DIFF_RESULT=$(echo bash common_job.sh)
           IS_CHANGED_BACK=$(echo $GIT_DIFF_RESULT | cut -d ',' -f2)
-          if [ $IS_CHANGED_BACK == true ]; then
+          if [ $IS_CHANGED_BACK = true ]; then
             echo 'Back test start!'
             cd server
             yarn install
@@ -61,7 +62,7 @@ jobs:
         - |
           GIT_DIFF_RESULT=$(echo bash common_job.sh)
           IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
-          if [ $IS_CHANGED_FRONT == true]; then
+          if [ $IS_CHANGED_FRONT = true]; then
             echo 'Develop server front build start!'
             echo 'build done...'
           fi
@@ -72,7 +73,7 @@ jobs:
         - |
           GIT_DIFF_RESULT=$(echo bash common_job.sh)
           IS_CHANGED_BACK=$(echo $GIT_DIFF_RESULT | cut -d ',' -f2)
-          if [ $IS_CHANGED_BACK == "true"]; then
+          if [ $IS_CHANGED_BACK = "true"]; then
             echo 'Develop server back build start!'
             echo 'build done...'
           fi
@@ -85,7 +86,7 @@ jobs:
         - |
           GIT_DIFF_RESULT=$(echo bash common_job.sh)
           IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
-          if [ $IS_CHANGED_FRONT == true]; then
+          if [ $IS_CHANGED_FRONT = true]; then
             echo 'Product server front build start!'
             echo 'build done...'
           fi
@@ -96,7 +97,7 @@ jobs:
         - |
           GIT_DIFF_RESULT=$(echo bash common_job.sh)
           IS_CHANGED_BACK=$(echo $GIT_DIFF_RESULT | cut -d ',' -f2)
-          if [ $IS_CHANGED_BACK == true]; then
+          if [ $IS_CHANGED_BACK = true]; then
             echo 'Product server back build start!'
             echo 'build done...'
           fi
