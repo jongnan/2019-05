@@ -36,11 +36,10 @@ jobs:
   include:
     - stage: 'TEST'
       name: 'FRONT'
-      if: type = pull_request
+      if: type = push
       script: echo 'front'
-
     - name: 'BACK'
-      if: type = pull_request
+      if: type = push
       script: echo 'dev!'
 # jobs:
 #   include:
