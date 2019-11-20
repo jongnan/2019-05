@@ -24,16 +24,16 @@ jobs:
     - stage: 'TEST'
       name: 'FRONT TEST'
       if: type = pull_request
-      before_script:
+      before_install:
         - GIT_DIFF_RESULT=$(eval bash common_job.sh)
-        - echo $GIT_DIFF_RESULT
         - IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
+        - cd client
+      install:
+        - yarn
       script:
         - |
           if [ $IS_CHANGED_FRONT = true ]; then
             echo 'Front test start!'
-            cd client
-            yarn install
             yarn test
             echo 'test done...'
           else
