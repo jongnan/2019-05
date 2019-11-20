@@ -1,22 +1,23 @@
 language: node_js
 
 node_js:
-    - 12.13
+  - 12.13
 
 cache:
-    - npm
-    - yarn
+  - npm
+  - yarn
 
 git:
-    depth: false
+  depth: false
 
 services:
-    - docker
+  - docker
 
 branches:
-    only:
-        - master
-        - test
+  only:
+    - master
+    - develop
+    - test
 # before_script:
 # 	- |
 # 		if [ $TRAVIS_PULL_REQUEST_SLUG == $TRAVIS_REPO_SLUG ]; then
