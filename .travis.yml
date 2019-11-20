@@ -32,36 +32,36 @@ services:
 # 	- IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
 # 	- IS_CHANGED_BACK=$(echo $GIT_DIFF_RESULT | cut -d ',' -f2)
 
-jobs:
-  include:
-		#PULL_REQUEST CHECKING STAGE
-    - stage: 'DEV TEST'
-      name: 'FRONT TEST'
-      if: type = pull_request
-      script:
-        - |
-					if [ $IS_CHANGED_FRONT == true ]; then
-						echo 'Front test start!'
-						cd client
-						yarn install
-						yarn test
-						echo 'test done...'
-					else 
-						echo 'Front isn't changed...'
-					fi
+# jobs:
+#   include:
+# 		#PULL_REQUEST CHECKING STAGE
+#     - stage: 'DEV TEST'
+#       name: 'FRONT TEST'
+#       if: type = pull_request
+#       script:
+#         - |
+# 					if [ $IS_CHANGED_FRONT == true ]; then
+# 						echo 'Front test start!'
+# 						cd client
+# 						yarn install
+# 						yarn test
+# 						echo 'test done...'
+# 					else 
+# 						echo 'Front isn't changed...'
+# 					fi
 
-		- name: 'BACK TEST'
-			if: type = pull_request
-			script:
-				- |
-					if [ $IS_CHANGED_BACK == true ]; then
-						echo 'Back test start!'
-						cd server
-						yarn install
-						echo 'test done...'
-					else
-						echo 'Back is not changed...'
-					fi
+# 		- name: 'BACK TEST'
+# 			if: type = pull_request
+# 			script:
+# 				- |
+# 					if [ $IS_CHANGED_BACK == true ]; then
+# 						echo 'Back test start!'
+# 						cd server
+# 						yarn install
+# 						echo 'test done...'
+# 					else
+# 						echo 'Back is not changed...'
+# 					fi
 
     # #DEVELOP SERVER BUILD STAGE
 		# - stage: 'DEV BUILD'
