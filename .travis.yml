@@ -27,7 +27,13 @@ jobs:
       if: type = push
       script:
         - |
-          if [ -z "$TRAVIS_PULL_REQUEST_SLUG" || "$TRAVIS_PULL_REQUEST_SLUG" = "$TRAVIS_REPO_SLUG" ]; then
+          if [ -z "$TRAVIS_PULL_REQUEST_SLUG" ]; then
+            echo "is null!"
+          else
+            echo "not null"
+          fi
+
+          if [ "$TRAVIS_PULL_REQUEST_SLUG" = "$TRAVIS_REPO_SLUG" ]; then
             echo 'Push or Pull Request from same remote branch'
             GIT_DIFF_RESULT=$(eval "$(echo bash diff_checking.sh remotes/origin/$TRAVIS_REPO_SLUG remotes/origin/develop)")
           else
@@ -36,6 +42,7 @@ jobs:
             git fetch prBranch develop
             GIT_DIFF_RESULT=$(eval "$(echo bash diff_checking.sh remotes/prBranch/develop remotes/origin/develop)")
           fi
+
           IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
           if [ "$IS_CHANGED_FRONT" = "true" ]; then
             echo 'Front test start!'
@@ -51,7 +58,7 @@ jobs:
       if: type = push
       script:
         - |
-          if [ -z "$TRAVIS_PULL_REQUEST_SLUG" || "$TRAVIS_PULL_REQUEST_SLUG" = "$TRAVIS_REPO_SLUG" ]; then
+          if [ "$TRAVIS_PULL_REQUEST_SLUG" = "$TRAVIS_REPO_SLUG" ]; then
             echo 'Push or Pull Request from same remote branch'
             GIT_DIFF_RESULT=$(eval "$(echo bash diff_checking.sh remotes/origin/$TRAVIS_REPO_SLUG remotes/origin/develop)")
           else
