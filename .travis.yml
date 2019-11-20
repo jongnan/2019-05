@@ -13,8 +13,8 @@ services:
     - docker
 
 branches:
-	only:
-		- master
+only:
+	- master
 
 # before_script:
 # 	- |
