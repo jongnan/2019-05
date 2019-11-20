@@ -98,7 +98,7 @@ jobs:
       if: branch = master AND type = push
       script:
         - |
-			    if [ $IS_CHANGED_BACK == true]; then
+          if [ $IS_CHANGED_BACK == true]; then
             echo 'Product server back build start!'
             echo 'build done...'
           fi
