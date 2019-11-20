@@ -1,22 +1,21 @@
 language: node_js
+# node_js:
+#   - 12.13
 
-node_js:
-  - 12.13
+# cache:
+# 	- npm
+# 	- yarn
 
-cache: 
-	- npm
-	- yarn
+# git:
+#   depth: false
 
-git:
-  depth: false
+# services:
+#   - docker
 
-services:
-  - docker
-
-branches:
-  only:
-		- master
-		- develop
+# branches:
+#   only:
+# 		- master
+# 		- develop
 
 # before_script:
 # 	- |
@@ -27,7 +26,7 @@ branches:
 # 			echo 'Push or Pull Request from another remote branch'
 # 			eval "$(echo git remote add prBranch https://github.com/$TRAVIS_PULL_REQUEST_SLUG.git)"
 # 			git fetch prBranch develop
-# 			GIT_DIFF_RESULT=$(eval "$(echo bash diff_checking.sh remotes/prBranch/develop remotes/origin/develop)") 
+# 			GIT_DIFF_RESULT=$(eval "$(echo bash diff_checking.sh remotes/prBranch/develop remotes/origin/develop)")
 # 		fi
 # 	- IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
 # 	- IS_CHANGED_BACK=$(echo $GIT_DIFF_RESULT | cut -d ',' -f2)
@@ -46,7 +45,7 @@ branches:
 # 						yarn install
 # 						yarn test
 # 						echo 'test done...'
-# 					else 
+# 					else
 # 						echo 'Front isn't changed...'
 # 					fi
 
@@ -63,42 +62,42 @@ branches:
 # 						echo 'Back is not changed...'
 # 					fi
 
-    # #DEVELOP SERVER BUILD STAGE
-		# - stage: 'DEV BUILD'
-		# 	name: 'DEV SERVER FRONT BUILD'
-		# 	if: branch = develop AND type = push
-		# 	script:
-		# 		- |
-		# 			if [ $IS_CHANGED_FRONT == true]; then
-		# 				echo 'Develop server front build start!'
-		# 				echo 'build done...'
-		# 			fi
+# #DEVELOP SERVER BUILD STAGE
+# - stage: 'DEV BUILD'
+# 	name: 'DEV SERVER FRONT BUILD'
+# 	if: branch = develop AND type = push
+# 	script:
+# 		- |
+# 			if [ $IS_CHANGED_FRONT == true]; then
+# 				echo 'Develop server front build start!'
+# 				echo 'build done...'
+# 			fi
 
-		# - name: 'DEV SERVER BACK BUILD'
-		# 	if: branch = develop AND type = push
-		# 	script:
-		# 		- |
-		# 			if [ $IS_CHANGED_BACK == true]; then
-		# 				echo 'Develop server back build start!'
-		# 				echo 'build done...'
-		# 			fi
+# - name: 'DEV SERVER BACK BUILD'
+# 	if: branch = develop AND type = push
+# 	script:
+# 		- |
+# 			if [ $IS_CHANGED_BACK == true]; then
+# 				echo 'Develop server back build start!'
+# 				echo 'build done...'
+# 			fi
 
-		# #PRODUCT SERVER BUILD STAGE
-		# - stage: 'PROD BUILD'
-		# 	name: 'PROD SERVER FRONT BUILD'
-		# 	if: branch = master AND type = push
-		# 	script:
-		# 		- |
-		# 			if [ $IS_CHANGED_FRONT == true]; then
-		# 				echo 'Product server front build start!'
-		# 				echo 'build done...'
-		# 			fi
+# #PRODUCT SERVER BUILD STAGE
+# - stage: 'PROD BUILD'
+# 	name: 'PROD SERVER FRONT BUILD'
+# 	if: branch = master AND type = push
+# 	script:
+# 		- |
+# 			if [ $IS_CHANGED_FRONT == true]; then
+# 				echo 'Product server front build start!'
+# 				echo 'build done...'
+# 			fi
 
-		# - name: 'PROD SERVER BACK BUILD'
-		# 	if: branch = master AND type = push
-		# 	script:
-		# 		- |
-		# 			if [ $IS_CHANGED_BACK == true]; then
-		# 				echo 'Product server back build start!'
-		# 				echo 'build done...'
-		# 			fi
+# - name: 'PROD SERVER BACK BUILD'
+# 	if: branch = master AND type = push
+# 	script:
+# 		- |
+# 			if [ $IS_CHANGED_BACK == true]; then
+# 				echo 'Product server back build start!'
+# 				echo 'build done...'
+# 			fi
