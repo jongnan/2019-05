@@ -25,6 +25,7 @@ jobs:
       name: 'FRONT TEST'
       if: type = pull_request
       before_install:
+        - echo $TRAVIS_COMMIT_RANGE
         - GIT_DIFF_RESULT=$(eval bash common_job.sh)
         - IS_CHANGED_FRONT=$(echo $GIT_DIFF_RESULT | cut -d ',' -f1)
         - |
