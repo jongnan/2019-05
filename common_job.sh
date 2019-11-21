@@ -10,9 +10,6 @@
 #   GIT_DIFF_RESULT=$(eval $(echo bash diff_checking.sh remotes/prBranch/$TRAVIS_BRANCH remotes/origin/$TRAVIS_BRANCH))
 # fi
 
-COMMIT_START=$(echo $TRAVIS_COMMIT_RANGE | cut -d '...' -f1)
-COMMIT_END=$(echo $TRAVIS_COMMIT_RANGE | cut -d '...' -f2)
-
-GIT_DIFF_RESULT=$(eval $(echo bash diff_checking.sh $COMMIT_START $COMMIT_END))
+GIT_DIFF_RESULT=$(eval $(echo bash diff_checking.sh $TRAVIS_COMMIT_RANGE))
 
 echo $GIT_DIFF_RESULT
